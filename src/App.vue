@@ -5,29 +5,29 @@
 </template>
 
 <script>
-import storage from "./storage/index";
+// import storage from "./storage/index";
 export default {
   name: "App",
   components: {},
   data() {
-    return {};
+    return {
+      res: {}
+    }
   },
   mounted() {
     // storage.setItem("a", 1);
     // storage.setItem('user',{a:1})
     // storage.setItem('abc',{a:1},'user')
-    storage.clear('a','user')
+    // storage.clear('a','user')
+    this.axios.get('/user/login').then((res)=>{
+      this.res = res;
+    })
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+@import './assets/scss/reset.scss';
+@import './assets/scss/config.scss';
+@import './assets/scss/button.scss';
 </style>
