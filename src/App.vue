@@ -15,13 +15,22 @@ export default {
     }
   },
   mounted() {
-    // storage.setItem("a", 1);
-    // storage.setItem('user',{a:1})
-    // storage.setItem('abc',{a:1},'user')
-    // storage.clear('a','user')
-    this.axios.get('/user/login').then((res)=>{
-      this.res = res;
-    })
+    this.getUser();
+    this.getCartCount();
+  },
+  methods:{
+    getUser(){
+      this.axios.get('/user').then((res={})=>{
+        //to-do 保存到vuex里
+        this.$store.dispatch('saveUserName',res.username);
+      })
+    },
+    getCartCount(){
+      this.axios.get('/carts/products/sum').then((res=0)=>{
+        //to-do 保存到vuex里
+        this.$store.dispatch('saveCartCount',res);
+      })
+    }
   }
 };
 </script>
